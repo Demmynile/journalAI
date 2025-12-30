@@ -1,28 +1,31 @@
 import "../tamagui-web.css";
 
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router'
+import { ModalProvider } from "@/contexts/ModalContext";
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { Slot } from 'expo-router';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { TamaguiProvider } from "tamagui";
 import { tamaguiConfig } from '../tamagui.config';
-import { ClerkProvider } from '@clerk/clerk-expo';
-import { tokenCache } from '@clerk/clerk-expo/token-cache'
 
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    <SafeAreaProvider>
     <ClerkProvider tokenCache={tokenCache}>
      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-        </Stack>
-      </ThemeProvider>
+       <ModalProvider>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+         <Slot />
+           </ThemeProvider>
+       </ModalProvider>
       </TamaguiProvider>
     </ClerkProvider>
+    </SafeAreaProvider>
   
   );
 }

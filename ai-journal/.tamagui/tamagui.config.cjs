@@ -599,7 +599,7 @@ function createAnimations(animations) {
         getValue() {
           return val;
         },
-        setValue(next, config, onFinish2) {
+        setValue(next, config2, onFinish2) {
           setVal(next), setOnFinish(onFinish2);
         },
         stop() {
@@ -866,8 +866,55 @@ Expected a subset of: ${expected.join(", ")}
   return tamaguiConfig2;
 };
 
+// node_modules/tamagui/dist/esm/index.mjs
+var import_core3 = require("@tamagui/core");
+
 // tamagui.config.ts
-var tamaguiConfig = createTamagui(defaultConfig);
+var customTokens = (0, import_core3.createTokens)({
+  color: {
+    purple1: "#faf5ff",
+    purple2: "#f3e8ff",
+    purple3: "#e9d5ff",
+    purple4: "#d8b4fe",
+    purple5: "#c084fc",
+    purple6: "#a855f7",
+    purple7: "#9333ea",
+    purple8: "#7e22ce",
+    purple9: "#904BFF",
+    purple10: "#6b21a8",
+    purple11: "#581c87",
+    purple12: "#3b0764"
+  },
+  radius: defaultConfig.tokens.radius,
+  zIndex: defaultConfig.tokens.zIndex,
+  space: defaultConfig.tokens.space,
+  size: defaultConfig.tokens.size
+});
+var baseTheme = defaultConfig.themes.light_blue;
+var config = {
+  ...defaultConfig,
+  tokens: customTokens,
+  themes: {
+    ...defaultConfig.themes,
+    // Create purple theme with same structure as blue
+    purple: {
+      ...baseTheme,
+      background: "#904BFF",
+      backgroundHover: "#7e22ce",
+      backgroundPress: "#6b21a8",
+      backgroundFocus: "#904BFF",
+      color: "#ffffff",
+      colorHover: "#ffffff",
+      colorPress: "#ffffff",
+      colorFocus: "#ffffff",
+      borderColor: "#904BFF",
+      borderColorHover: "#7e22ce",
+      borderColorPress: "#6b21a8",
+      borderColorFocus: "#904BFF"
+    }
+  }
+};
+var tamaguiConfig = createTamagui(config);
 var tamagui_config_default = tamaguiConfig;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
