@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "convex" : {
+            "command" : "npx -y convex@latest mcp start",
+            "env": {},
+            "args": []
+        }, 
+        "Sanity" : {
+
+            "url": "https://mcp.sanity.io",
+            "type" : "http"
+        }
+    }
+}
