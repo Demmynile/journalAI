@@ -1,6 +1,8 @@
 // import {category} from './category'
 // import {dailyPrompt} from './dailyPrompt'
+import { category } from './category'
+import { dailyPrompt } from './dailyPrompt'
 import {journalEntry} from './journalEntry'
 
-export const schemaTypes = [journalEntry]
+export const schemaTypes = [journalEntry , category , dailyPrompt]
 
