@@ -1,3 +1,4 @@
+import "@/polyfill";
 import "../tamagui-web.css";
 
 import { ModalProvider } from "@/contexts/ModalContext";
@@ -7,7 +8,7 @@ import { tokenCache } from '@clerk/clerk-expo/token-cache';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot } from 'expo-router';
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { TamaguiProvider } from "tamagui";
+import { PortalProvider, TamaguiProvider } from "tamagui";
 import { tamaguiConfig } from '../tamagui.config';
 
 
@@ -18,11 +19,13 @@ export default function RootLayout() {
     <SafeAreaProvider>
     <ClerkProvider tokenCache={tokenCache}>
      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
+      <PortalProvider shouldAddRootHost>
        <ModalProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
          <Slot />
            </ThemeProvider>
        </ModalProvider>
+      </PortalProvider>
       </TamaguiProvider>
     </ClerkProvider>
     </SafeAreaProvider>
